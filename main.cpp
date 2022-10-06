@@ -6,8 +6,41 @@ using namespace std;
 class BigDecimalInt
 {
     string num;
-    int sign;
+    //int sign;
+    char sign;
 
+// Ali El Iraqi Code
+public:
+        bool operator<(BigDecimalInt anotherDec){
+        if(anotherDec.sign == '-' and sign == '+'){
+            return false;
+        }else if(anotherDec.sign == '+' and sign == '+'){
+            if(anotherDec.num.size() > num.size()){
+                return true;
+            }
+            else if(anotherDec.num.size() < num.size()){
+                return false;
+            }else{
+                for(int i = 0; i < num.size();){
+                    if(num[i] == anotherDec.num[i]){
+                        i++;
+                    }
+                    else{
+                        if(num[i] > anotherDec.num[i]){
+                            return false;
+                        }
+                        else{
+                            return true;
+                        }
+                    }
+                }
+            }
+        }else if (anotherDec.sign == '+' and sign == '-'){
+            return true;
+        }
+    }
+    
+// USF EMAD CODE
 public:
     BigDecimalInt(string DecStr) // Overload for string inputs
     {
@@ -47,7 +80,7 @@ public:
 
     string getNum()
     {
-        return ((sign == 1) ? "+" : "-") + num;
+        return ((sign == '+') ? "+" : "-") + num;
     }
 
 private:
@@ -55,9 +88,9 @@ private:
     {
         if (s[0] == '-')
         {
-            return -1;
+            return '-';
         }
-        return 1;
+        return '+';
     }
     string removeSign(string s) // removes the +/- signs at the beginning of the string
     {
@@ -71,8 +104,12 @@ private:
 
 int main()
 {
-    // BigDecimalInt firstNumber("-108");
-    // BigDecimalInt secondNumber("208");
+    BigDecimalInt bigNumber("-2345237857235872350235707832598757392");
+    BigDecimalInt smallNumber("+537238957983257983275982735735298235");
+
+    // BigDecimalInt firstNumber("-1036444444444463464363468");
+    // BigDecimalInt secondNumber("20834643634634643643643436436");
     // BigDecimalInt sumNumber = firstNumber + secondNumber;
     // cout << sumNumber.getNum();
+    cout << (bigNumber < smallNumber);
 }
