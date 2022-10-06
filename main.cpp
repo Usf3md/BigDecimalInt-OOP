@@ -9,12 +9,12 @@ class BigDecimalInt
     int sign;
 
 public:
-    BigDecimalInt(string DecStr)
+    BigDecimalInt(string DecStr) // Overload for string inputs
     {
         sign = getSign(DecStr);
         num = removeSign(DecStr);
     };
-    BigDecimalInt(int DecInt)
+    BigDecimalInt(int DecInt) // overload for integer inputs
     {
         string DecStr = to_string(DecInt);
         sign = getSign(DecStr);
@@ -51,7 +51,7 @@ public:
     }
 
 private:
-    int getSign(string s)
+    int getSign(string s) // gets the sign of the number and returns 1 or -1
     {
         if (s[0] == '-')
         {
@@ -59,7 +59,7 @@ private:
         }
         return 1;
     }
-    string removeSign(string s)
+    string removeSign(string s) // removes the +/- signs at the beginning of the string
     {
         if (!isdigit(s[0]))
         {
