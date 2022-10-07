@@ -6,52 +6,63 @@ using namespace std;
 class BigDecimalInt
 {
     string num;
-    //int sign;
-    char sign;
 
-// Ali El Iraqi Code
+    // Ali El Iraqi Code
 public:
-        bool operator<(BigDecimalInt anotherDec){
-        if(anotherDec.sign == '-' and sign == '+'){
+    bool operator<(BigDecimalInt anotherDec)
+    {
+        if (anotherDec.num[0] == '-' && num[0] == '+')
+        {
             return false;
-        }else if(anotherDec.sign == '+' and sign == '+'){
-            if(anotherDec.num.size() > num.size()){
+        }
+        else if (anotherDec.num[0] == '+' && num[0] == '+')
+        {
+            if (anotherDec.num.size() > num.size())
+            {
                 return true;
             }
-            else if(anotherDec.num.size() < num.size()){
+            else if (anotherDec.num.size() < num.size())
+            {
                 return false;
-            }else{
-                for(int i = 0; i < num.size();){
-                    if(num[i] == anotherDec.num[i]){
+            }
+            else
+            {
+                for (int i = 0; i < num.size();)
+                {
+                    if (num[i] == anotherDec.num[i])
+                    {
                         i++;
                     }
-                    else{
-                        if(num[i] > anotherDec.num[i]){
+                    else
+                    {
+                        if (num[i] > anotherDec.num[i])
+                        {
                             return false;
                         }
-                        else{
+                        else
+                        {
                             return true;
                         }
                     }
                 }
             }
-        }else if (anotherDec.sign == '+' and sign == '-'){
+        }
+        else if (anotherDec.num[0] == '+' && num[0] == '-')
+        {
             return true;
         }
     }
-    
-// USF EMAD CODE
+
+    // USF EMAD CODE
 public:
     BigDecimalInt(string DecStr) // Overload for string inputs
     {
-        sign = getSign(DecStr);
-        num = removeSign(DecStr);
+        num = addPositiveSign(DecStr);
     };
     BigDecimalInt(int DecInt) // overload for integer inputs
     {
         string DecStr = to_string(DecInt);
-        sign = getSign(DecStr);
-        num = removeSign(DecStr);
+        num = addPositiveSign(DecStr);
     };
 
     BigDecimalInt operator+(BigDecimalInt anotherDec) // Not Complete
@@ -80,23 +91,15 @@ public:
 
     string getNum()
     {
-        return ((sign == '+') ? "+" : "-") + num;
+        return ((num[0] == '+') ? "+" : "-") + num[0];
     }
 
 private:
-    int getSign(string s) // gets the sign of the number and returns 1 or -1
+    string addPositiveSign(string s) // adds the + sign at the beginning of the string
     {
-        if (s[0] == '-')
+        if (isdigit(s[0]))
         {
-            return '-';
-        }
-        return '+';
-    }
-    string removeSign(string s) // removes the +/- signs at the beginning of the string
-    {
-        if (!isdigit(s[0]))
-        {
-            s = s.erase(0, 1);
+            return "+" + s;
         }
         return s;
     }
@@ -104,8 +107,8 @@ private:
 
 int main()
 {
-    BigDecimalInt bigNumber("-2345237857235872350235707832598757392");
-    BigDecimalInt smallNumber("+537238957983257983275982735735298235");
+    BigDecimalInt bigNumber("-4");
+    BigDecimalInt smallNumber("-5");
 
     // BigDecimalInt firstNumber("-1036444444444463464363468");
     // BigDecimalInt secondNumber("20834643634634643643643436436");
