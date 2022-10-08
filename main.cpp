@@ -177,7 +177,89 @@ private:
         }
         return s;
     }
+public:
+    bool operator==(BigDecimalInt anotherDec)
+    {
+        if (sign()==0&&anotherDec.sign()==0)//if nothing nothing
+        {
+            if (num==anotherDec.num)
+                return true;
+            else
+                return false;
+        }
+        else if (sign()==-1&&anotherDec.sign()==-1)//if - -
+        {
+            if (num==anotherDec.num)
+                return true;
+            else
+                return false;
+        }
+        else if (sign()==1&&anotherDec.sign()==1)//if + +
+        {
+            if (num==anotherDec.num)
+                return true;
+            else
+                return false;
+        }
+        else if (sign()==0&&anotherDec.sign()==1)//if nothing +
+        {
+            anotherDec.num.erase(anotherDec.num.begin());
+            if (num==anotherDec.num)
+                return true;
+            else
+                return false;
+        }
+        else if (sign()==1&&anotherDec.sign()==0)//if + nothing
+        {
+
+            num.erase(num.begin());
+            if (num==anotherDec.num)
+                return true;
+            else
+                return false;
+        }
+    }
+//==============================================================================
+    BigDecimalInt operator= (BigDecimalInt anotherDec)
+    {
+        num=anotherDec.num;
+        return anotherDec;
+    }
+//==============================================================================
+    int size()
+    {
+        if (num[0]=='-'||num[0]=='+')
+            return num.size()-1;
+        else
+            return num.size();
+    }
+//==============================================================================
+    int sign()
+    {
+        if (num[0]=='-')
+            return -1;
+        else if (num[0]=='+')
+            return 1 ;
+        else
+            return 0;
+    }
+//==============================================================================
+    void pr()
+    {
+        int va = stoi(num);
+
+        cout <<num;
+    }
+//====================================================================
+    friend ostream& operator << (ostream& out, BigDecimalInt b);
+
 };
+ostream& operator<< (ostream& out, BigDecimalInt b)
+{
+    out<<b.num<<endl;
+    return out;
+}
+
 
 int main()
 {
@@ -202,3 +284,119 @@ int main()
         cout << BigDecimalInt1 << endl << "is greater than" << endl << BigDecimalInt2;
     }
 }
+/*#include <iostream>
+#include <bits/stdc++.h>
+#include <string>
+
+using namespace std;
+class BigDecimalInt
+{
+private :
+    string num;
+public:
+    BigDecimalInt(string a )
+    {
+        num = a;
+    }
+
+//======================================================================
+    bool operator==(BigDecimalInt anotherDec)
+    {
+        if (sign()==0&&anotherDec.sign()==0)//if nothing nothing
+        {
+            if (num==anotherDec.num)
+                return true;
+            else
+                return false;
+        }
+        else if (sign()==-1&&anotherDec.sign()==-1)//if - -
+        {
+            if (num==anotherDec.num)
+                return true;
+            else
+                return false;
+        }
+        else if (sign()==1&&anotherDec.sign()==1)//if + +
+        {
+            if (num==anotherDec.num)
+                return true;
+            else
+                return false;
+        }
+        else if (sign()==0&&anotherDec.sign()==1)//if nothing +
+        {
+            anotherDec.num.erase(anotherDec.num.begin());
+            if (num==anotherDec.num)
+                return true;
+            else
+                return false;
+        }
+        else if (sign()==1&&anotherDec.sign()==0)//if + nothing
+        {
+
+            num.erase(num.begin());
+            if (num==anotherDec.num)
+                return true;
+            else
+                return false;
+        }
+    }
+//==============================================================================
+    BigDecimalInt operator= (BigDecimalInt anotherDec)
+    {
+        num=anotherDec.num;
+        return anotherDec;
+    }
+//==============================================================================
+    int size()
+    {
+        if (num[0]=='-'||num[0]=='+')
+            return num.size()-1;
+        else
+            return num.size();
+    }
+//==============================================================================
+    int sign()
+    {
+        if (num[0]=='-')
+            return -1;
+        else if (num[0]=='+')
+            return 1 ;
+        else
+            return 0;
+    }
+//==============================================================================
+    void pr()
+    {
+        int va = stoi(num);
+
+        cout <<num;
+    }
+//====================================================================
+    friend ostream& operator << (ostream& out, BigDecimalInt b);
+
+};
+ostream& operator<< (ostream& out, BigDecimalInt b)
+{
+    out<<b.num<<endl;
+    return out;
+}
+
+int main()
+{
+    BigDecimalInt bigNumber("7");
+    BigDecimalInt smallNumber("9");
+
+    BigDecimalInt firstNumber("-1036444444444463464363468");
+    BigDecimalInt secondNumber("20834643634634643643643436436");
+
+    BigDecimalInt num("+65694");
+    BigDecimalInt num2("694");
+    firstNumber=secondNumber;
+    cout<<firstNumber;
+    if (smallNumber>bigNumber)
+        cout <<"YUP"<<endl;
+    else
+        cout<<"NO"<<endl;
+}
+*/
