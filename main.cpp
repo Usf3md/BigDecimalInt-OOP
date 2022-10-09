@@ -199,6 +199,10 @@ public:
             signInt = -1;
         }
         num = removeSign(DecStr);
+        if (!num.length())
+        {
+            num = "0";
+        }
     };
 
     BigDecimalInt operator+(BigDecimalInt anotherDec) // Not Complete
