@@ -245,7 +245,6 @@ public:
         for (int i = first.num.length() - 1; i >= 0; i--)
         {
             value = carry + first.signInt * (first.num[i] - 48) + second.signInt * (second.num[i] - 48);
-            cout << carry << " + " << first.signInt << " * " << (first.num[i] - 48) << " + " << second.signInt << " * " << (second.num[i] - 48) << " = " << value << endl;
             carry = 0;
 
             if (i > 0)
